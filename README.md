@@ -234,5 +234,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for developers who love coding in the browser**#   C i p h e r S c h o o l s  
- 
+**Built with ❤️ for developers who love coding in the browser**#
