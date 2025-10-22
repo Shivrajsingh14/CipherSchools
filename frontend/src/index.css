@@ -1,0 +1,354 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Layout styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* IDE styles */
+.ide-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.file-explorer {
+  flex: 0 0 250px;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
+}
+
+.editor-container {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+.preview-container {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.dark-theme .file-explorer,
+.dark-theme .preview-container {
+  border-color: #333;
+}
+
+/* File Explorer */
+.file-tree {
+  padding: 10px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .file-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.file-item.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .file-item.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Preview Panel Styles */
+.preview-container .sp-wrapper {
+  height: 100% !important;
+}
+
+.preview-container .sp-layout {
+  height: 100% !important;
+}
+
+.preview-container .sp-preview-container {
+  height: 100% !important;
+}
+
+.preview-container .sp-preview-iframe {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Device Frame Styles */
+.device-preview {
+  transition: all 0.3s ease;
+}
+
+.device-preview.mobile {
+  border-radius: 25px;
+  border: 8px solid #333;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.device-preview.tablet {
+  border-radius: 12px;
+  border: 8px solid #333;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.device-preview.desktop {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Responsive preview container */
+.responsive-preview-container {
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-theme .responsive-preview-container {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+/* Save Status Styles */
+.save-status-chip {
+  transition: all 0.3s ease;
+}
+
+.save-button {
+  transition: all 0.2s ease;
+}
+
+.save-button:hover {
+  transform: scale(1.1);
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Save status animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.saving-indicator {
+  animation: pulse 1s infinite;
+}
+
+/* Dashboard Watermark */
+.dashboard-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 900;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.03;
+  color: #000;
+  transition: opacity 0.3s ease;
+}
+
+/* Dark theme watermark */
+.dark-theme .dashboard-watermark {
+  opacity: 0.05;
+  color: #fff;
+}
+
+/* Dashboard container positioning */
+.dashboard-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive watermark sizing */
+@media (max-width: 768px) {
+  .dashboard-watermark {
+    font-size: clamp(3rem, 15vw, 6rem);
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Login/Register Info Panel */
+.auth-info-panel {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-theme .auth-info-panel {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.auth-info-content {
+  max-width: 400px;
+  text-align: center;
+  z-index: 2;
+}
+
+.auth-info-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.auth-info-subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  font-weight: 400;
+}
+
+.auth-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.auth-feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+.auth-feature-icon {
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.auth-tagline {
+  margin-top: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Background decoration */
+.auth-info-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+  animation: float 20s linear infinite;
+  z-index: 1;
+}
+
+@keyframes float {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .auth-info-panel {
+    padding: 1.5rem;
+    min-height: 40vh;
+  }
+  
+  .auth-info-title {
+    font-size: 2.8rem;
+  }
+  
+  .auth-info-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .auth-feature-item {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-info-panel {
+    min-height: 35vh;
+    padding: 1rem;
+  }
+  
+  .auth-info-title {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .auth-info-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-feature-item {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .auth-tagline {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+}
